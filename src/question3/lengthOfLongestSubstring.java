@@ -1,5 +1,7 @@
 package question3;
 
+import util.Srand;
+
 import java.util.Scanner;
 
 class Solution {
@@ -45,14 +47,51 @@ class Solution {
 
         return maxlen;
     }
+    public int method1(String s){
+        int maxlen = 0;
+        int ln = s.length();
+        if("".equals(s)){
+            return 1;
+        }
+        for (int i = 0; i < s.length() ; i++) {
+            String temps = new String();
+
+            for (int j = i+1; j < s.length()+1; j++) {
+                char sj = (char)s.charAt(j-1);
+                if(temps.indexOf(sj)==-1){
+                    temps = s.substring(i,j);
+//                    System.out.println(temps);
+                }else{
+
+                    break;
+                }
+
+            }
+            if(maxlen<temps.length()){
+                maxlen = temps.length();
+            }
+        }
+        return maxlen;
+    }
+
+    public int method2(String s ){
+        int maxlen = 0;
+
+        return  maxlen;
+    }
 }
 
 public class lengthOfLongestSubstring {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        Scanner scanner = new Scanner(System.in);
-        String s = scanner.nextLine();
+        Srand srand = new Srand();
+        String s = srand.srandStrLower(6);
+        System.out.println(s);
+        System.out.println(sol.method1(s));
 
-        System.out.println(sol.lengthOfLongestSubstring(s));
+//        Scanner scanner = new Scanner(System.in);
+//        String s = scanner.nextLine();
+//        System.out.println(sol.lengthOfLongestSubstring(s));
+
     }
 }

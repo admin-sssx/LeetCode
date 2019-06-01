@@ -3,7 +3,17 @@ package util;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * 生成随机测试
+ */
 public class Srand {
+    /**
+     * ArrayList<Integer> 生成长度为size，start-end范围内的随机整数。
+     * @param size ArrayList长度
+     * @param start 开始范围
+     * @param end   结束范围
+     * @return
+     */
    public ArrayList<Integer> srandList(int size,int start, int end){
        ArrayList <Integer> arrayList = new ArrayList<>();
        Random random = new Random();
@@ -23,6 +33,10 @@ public class Srand {
        return arr;
    }
 
+    /**
+     *
+     * @param arr
+     */
    public void showArr(int [] arr){
        System.out.print("[");
        for (int i = 0; i < arr.length; i++) {
@@ -35,6 +49,21 @@ public class Srand {
        System.out.println();
    }
 
+    /**
+     * 生成长度为length的小写字母字符串
+     * @param length
+     * @return
+     */
+   public String srandStrLower(int length){
+       StringBuilder stringBuilder = new StringBuilder();
+       Random random = new Random();
+       for (int i = 0; i < length; i++) {
+           int rand = random.nextInt(26)+97;
+           stringBuilder.append((char)rand);
+       }
+       String str = ""+stringBuilder;
+       return  str;
+   }
 }
 
 class Test{
@@ -57,7 +86,7 @@ class Test{
             srand.showArr(arr);
 //            System.out.println("----------------end-------------------");
         }
-
+        System.out.println(srand.srandStrLower(26));
 
     }
 }
