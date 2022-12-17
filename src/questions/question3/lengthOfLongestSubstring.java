@@ -1,8 +1,9 @@
-package question3;
+package questions.question3;
 
 import util.Srand;
 
-import java.util.Scanner;
+import java.util.HashSet;
+import java.util.Set;
 
 class Solution {
     public int lengthOfLongestSubstring(String s) {
@@ -74,9 +75,34 @@ class Solution {
         return maxlen;
     }
 
+    /**
+     * hashSet存储
+     * @param s
+     * @return
+     */
     public int method2(String s ){
         int maxlen = 0;
-
+        char array[] = s.toCharArray();
+        for (int i = 0; i < array.length; i++) {
+            HashSet<Character> set = new HashSet();
+            set.add(array[i]);
+            if(set.size()>maxlen) {
+                maxlen = set.size();
+            }
+            for (int j = i+1; j < array.length; j++) {
+                if(set.contains(array[j])) {
+                    if(set.size()>maxlen) {
+                        maxlen = set.size();
+                    }
+                    break;
+                } else {
+                    set.add(array[j]);
+                    if(set.size()>maxlen) {
+                        maxlen = set.size();
+                    }
+                }
+            }
+        }
         return  maxlen;
     }
 }
@@ -86,8 +112,10 @@ public class lengthOfLongestSubstring {
         Solution sol = new Solution();
         Srand srand = new Srand();
         String s = srand.srandStrLower(6);
+        s = "au";
         System.out.println(s);
         System.out.println(sol.method1(s));
+        System.out.println(sol.method2(s));
 
 //        Scanner scanner = new Scanner(System.in);
 //        String s = scanner.nextLine();

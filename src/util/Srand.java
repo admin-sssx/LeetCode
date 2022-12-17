@@ -1,6 +1,8 @@
 package util;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -70,23 +72,29 @@ class Test{
     public static void main(String[] args) {
         Srand srand = new Srand();
         int arr [] = srand.srandArr(10,1,100);
-        System.out.println("----------------source data-------------------");
+
+//        srand.showArr(arr);
+//        Sort.quickSort(arr,0,arr.length-1);
+//        System.out.println(srand.srandStrLower(26));
+        Sort.bubble(arr);
+        System.out.println("----------------end data-------------------");
         srand.showArr(arr);
+        List list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(1,3);
 
-        for (int i = 0; i <arr.length-1 ; i++) {
-//            System.out.println("----------------start-------------------");
-            for (int j = 0; j < arr.length-i-1; j++) {
-
-                if(arr[j]>arr[j+1]){
-                    int temp = arr[j];
-                    arr[j] = arr[j+1];
-                    arr[j+1] = temp;
-                }
-            }
-            srand.showArr(arr);
-//            System.out.println("----------------end-------------------");
-        }
-        System.out.println(srand.srandStrLower(26));
+        List list2 = new LinkedList(list);
+        list.add(list2);
+        list2.clear();
+        list2.add(5);
+//        list.subList(2,4);
+        System.out.println(list);
+        String str1 = "str1";
+        String str2 = "str2";
+        String str3 = "str3";
+        str2 = str1.concat(str2);
+        System.out.println(str3.concat(str1));
 
     }
 }
