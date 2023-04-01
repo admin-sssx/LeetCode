@@ -16,7 +16,9 @@ package questions.question2;
 class ListNode {
       int val;
       ListNode next;
+      ListNode() {}
       ListNode(int x) { val = x; }
+      ListNode(int val, ListNode next) { this.val = val; this.next = next; }
       public ListNode addListNode(int n){
           ListNode ln = new ListNode(n);
           ListNode temp = ln;
@@ -47,6 +49,77 @@ class Solution {
         return ln.next;
     }
 
+    /**
+     * 2023/3/25写
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        ListNode resultHead = null;
+        ListNode tail = null;
+        //进位初始化为0
+        int carry = 0;
+        //只要下一位还有值就继续循环，进位>0也可以看作下一位有值
+        while(l1!=null||l2!=null||carry>0) {
+            //如果当前节点为空则val按0算
+            int a = 0;
+            int b = 0;
+            if(l1!=null) {
+                a = l1.val;
+                l1 = l1.next;
+            }
+            if(l2!=null) {
+                b = l2.val;
+                l2 = l2.next;
+            }
+            //是否有进位
+            int val = a+b+carry;
+            if(val>=10) {
+                val = val - 10;
+                carry = 1;
+            } else {
+                carry = 0;
+            }
+            //生成结果listNode
+            //头节点为null此时相当于初始化，尾节点便于插入
+            if(resultHead == null) {
+                resultHead = new ListNode(val,null);
+                tail = resultHead;
+            } else {
+                ListNode p = new ListNode(val,null);
+                tail.next = p;
+                tail = p;
+            }
+        }
+        return resultHead;
+    }
+
+    /**
+     * 复制的
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers3(ListNode l1, ListNode l2) {
+        ListNode root = new ListNode(0);
+        ListNode cursor = root;
+        int carry = 0;
+        while(l1 != null || l2 != null || carry != 0) {
+            int l1Val = l1 != null ? l1.val : 0;
+            int l2Val = l2 != null ? l2.val : 0;
+            int sumVal = l1Val + l2Val + carry;
+            carry = sumVal / 10;
+
+            ListNode sumNode = new ListNode(sumVal % 10);
+            cursor.next = sumNode;
+            cursor = sumNode;
+
+            if(l1 != null) l1 = l1.next;
+            if(l2 != null) l2 = l2.next;
+        }
+        return root.next;
+    }
 }
 
 public class addTwoNumbers {
@@ -58,7 +131,8 @@ public class addTwoNumbers {
         ListNode l2 = new ListNode(4);
         l2 = l2.addListNode(6);
         l2 = l2.addListNode(5);
-
+        l1 = null;
+        l2 = null;
 //        while(l1!=null){
 //            System.out.print(l1.val);
 //            l1=l1.next;
@@ -67,7 +141,7 @@ public class addTwoNumbers {
 //            System.out.print(l2.val);
 //            l2=l2.next;
 //        }
-        ListNode ll = sol.addTwoNumbers(l1,l2);
+        ListNode ll = sol.addTwoNumbers3(l1,l2);
         while(ll!=null){
             System.out.print(ll.val);
             ll=ll.next;
